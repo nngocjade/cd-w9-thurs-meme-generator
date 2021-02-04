@@ -2,5 +2,12 @@
 
 ## Implementation
 
-used express-generator --no-view
-"# cd-w9-thurs-meme-generator" 
+## Library
+
+npx express-generator --no-view
+
+npm install dotenv
+
+npm install cors (this controlls who can hit your api)
+
+npm i nodemon (app will reload automatically when a file changes)
