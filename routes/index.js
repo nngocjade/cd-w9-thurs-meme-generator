@@ -1,9 +1,7 @@
 var express = require("express");
 var router = express.Router();
+const memeAPI = require("./meme.api");
 
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.json({ status: "ok", text: "hello world" });
-});
+router.use("/memes", memeAPI);
 
 module.exports = router;
