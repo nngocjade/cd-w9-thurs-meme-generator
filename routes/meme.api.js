@@ -1,6 +1,8 @@
 var express = require("express");
 var router = express.Router();
+
 const upload = require("../middleware/upload.helper").upload;
+const photoHelper = require("../middleware/photo.helper");
 
 router.get("/", function (req, res, next) {
   res.json({ status: "ok", data: "Get all memes" });
@@ -12,12 +14,17 @@ router.get("/", function (req, res, next) {
  * @access Public
  */
 
-router.post("/", upload.single("image"), function (req, res, next) {
-  //Accept an upload with this request
-  //Save the file to disk
-  //Return success if everything worked
-  console.log("req.file is ", req.file);
-  res.json({ status: "ok", text: "upload file here" });
-});
+router.post(
+  "/",
+  upload.single("image"),
+  photoHelper.resize,
+  function (req, res, next) {
+    //Accept an upload with this request
+    //Save the file to disk
+    //Return success if everything worked
+    console.log("req.file is ", req.file);
+    res.json({ status: "ok", text: "upload file here" });
+  }
+);
 
 module.exports = router;
