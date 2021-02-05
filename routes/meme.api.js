@@ -6,9 +6,12 @@ const photoHelper = require("../middleware/photo.helper");
 
 const memeController = require("../controllers/meme.controller");
 
-router.get("/", function (req, res, next) {
-  res.json({ status: "ok", data: "Get all memes" });
-});
+/**
+ * @route GET api/memes
+ * @description Get all memes
+ * @access Public
+ */
+router.get("/", memeController.getMemes);
 
 /**
  * @route POST api/memes
