@@ -65,7 +65,11 @@ const getMemes = (req, res, next) => {
     const offset = perPage * (page - 1);
     memes = memes.slice(offset, offset + perPage);
 
-    res.json({ memes, totalPages });
+    res.json({
+      status: "ok",
+      data: memes,
+      totaPages: totalPages,
+    });
   } catch (err) {
     next(err);
   }
