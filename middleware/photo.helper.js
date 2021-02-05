@@ -16,6 +16,7 @@ const resize = async (req, res, next) => {
 
 const putTextOnImage = async (originalImagePath, outputMemePath, texts) => {
   try {
+    console.log("meme ", texts);
     const image = await Jimp.read(originalImagePath);
     const dimension = {
       width: image.bitmap.width,

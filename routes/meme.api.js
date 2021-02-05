@@ -30,15 +30,7 @@ router.post(
   "/",
   upload.single("image"),
   photoHelper.resize,
-  memeController.createMeme,
-  function (req, res, next) {
-    //Accept an upload with this request
-    //Save the file to disk
-    //Return success if everything worked
-    console.log("req.file is ", req.file);
-
-    res.json({ status: "ok", text: "upload file here" });
-  }
+  memeController.createMeme
 );
 
 module.exports = router;

@@ -3,6 +3,7 @@ const fs = require("fs");
 const photoHelper = require("../middleware/photo.helper");
 
 // ===============CREATE MEME==================
+
 const createMeme = async (req, res, next) => {
   try {
     // Read data from the json file
@@ -36,7 +37,12 @@ const createMeme = async (req, res, next) => {
     meme.updatedAt = Date.now();
     memes.unshift(meme);
     fs.writeFileSync("memes.json", JSON.stringify({ memes }));
-    res.status(201).json(meme);
+    // status 201 = CREATED
+    res.status(201).json({
+      status: "ok",
+      message: "Meme successfully created!",
+      data: meme,
+    });
   } catch (err) {
     next(err);
   }
@@ -65,7 +71,8 @@ const getMemes = (req, res, next) => {
   }
 };
 
-// ========================Get ORIGINAL IMAGE===============
+// ===================GET ORIGINAL IMAGE===============
+
 const getOriginalImages = (req, res, next) => {
   try {
     const page = req.query.page || 1;
