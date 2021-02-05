@@ -65,7 +65,33 @@ const getMemes = (req, res, next) => {
   }
 };
 
+// ========================Get ORIGINAL IMAGE===============
+const getOriginalImages = (req, res, next) => {
+  try {
+    const page = req.query.page || 1;
+    const perPage = req.query.perPage || 10;
+
+    // Read data from the json file
+    let rawData = fs.readFileSync("memes.json");
+    let memes = JSON.parse(rawData).memes;
+    let originalImages = memes.map((item) => item.originalImagePath);
+    originalImages = originalImages.filter(
+      (item, i, arr) => arr.indexOf(item) === i
+    );
+    // Calculate slicing
+    const totalMemes = memes.length;
+    const totalPages = Math.ceil(totalMemes / perPage);
+    const offset = perPage * (page - 1);
+    originalImages = originalImages.slice(offset, offset + perPage);
+
+    res.json({ originalImages, totalPages });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   createMeme,
   getMemes,
+  getOriginalImages,
 };
