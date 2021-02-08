@@ -9,11 +9,12 @@ const createMeme = async (req, res, next) => {
     // Read data from the json file
     let rawData = fs.readFileSync("memes.json");
     let memes = JSON.parse(rawData).memes;
-
+    console.log("body:", req.body);
     const meme = {};
 
     const texts = req.body.texts || [];
-    const textsArr = [].concat(texts); // Make sure texts is an array.
+    const textsArr = [].concat(texts);
+    console.log("textArray", textsArr); // Make sure texts is an array.
     meme.texts = textsArr.map((text) => JSON.parse(text));
 
     // Prepare data for the new meme

@@ -1,4 +1,7 @@
 const Jimp = require("jimp");
+const JPEG = require("jpeg-js");
+Jimp.decoders["image/jpeg"] = (data) =>
+  JPEG.decode(data, { maxMemoryUsageInMB: 1024 });
 
 const resize = async (req, res, next) => {
   if (req.file) {
