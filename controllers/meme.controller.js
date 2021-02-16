@@ -69,7 +69,7 @@ const getMemes = (req, res, next) => {
     res.json({
       status: "ok",
       data: memes,
-      totaPages: totalPages,
+      totalPages: totalPages,
     });
   } catch (err) {
     next(err);
