@@ -33,4 +33,11 @@ router.post(
   memeController.createMeme
 );
 
+/**
+ * @route PUT api/memes/:id
+ * @description Update text on the meme
+ * @access Public
+ */
+router.put("/:id", memeController.updateMeme);
+
 module.exports = router;
