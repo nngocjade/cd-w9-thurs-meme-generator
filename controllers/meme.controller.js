@@ -1,5 +1,6 @@
 const express = require("express");
 const fs = require("fs");
+const utilsHelper = require("../helpers/utils.helper");
 const photoHelper = require("../middleware/photo.helper");
 
 // ===============CREATE MEME==================
@@ -106,7 +107,7 @@ const getOriginalImages = (req, res, next) => {
 
 const updateMeme = async (req, res, next) => {
   try {
-    const memeId = req.params.id;
+    const memeId = parseInt(req.params.id);
     console.log("memeId;", memeId);
     // Read data from the json file
     let rawData = fs.readFileSync("memes.json");
@@ -136,11 +137,18 @@ const updateMeme = async (req, res, next) => {
       "Meme has been updated!"
     );
   } catch (err) {
-    next(err);
+    return utilsHelper.sendResponse(
+      res,
+      err.statusCode,
+      false,
+      null,
+      { message: err.message },
+      "Some error"
+    );
   }
 };
 
-console.log("updateMeme(): ", updateMeme());
+// console.log("updateMeme(): ", updateMeme());
 
 module.exports = {
   createMeme,
